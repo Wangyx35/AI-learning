@@ -5,11 +5,11 @@ import torch as t
 
 show = ToPILImage()  # 可以把Tensor转化成Image，方便可视化
 
-# 定义对数据的预处理 
+# 定义对数据的预处理
 
-transform = tranforms.Compose([
-    tranforms.ToTensor(),  # 转化为Tensor
-    tranforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),  # 归一化
+transform = transforms.Compose([
+    transforms.ToTensor(),  # 转化为Tensor
+    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),  # 归一化
 ])
 
 # 训练集
@@ -36,6 +36,9 @@ tsetloader = t.utils.data.DataLoader(testset,
 
 classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog',
            'horse', 'ship', 'truck')
+
+
+
 
 # (data, label) = trainset[100]
 # print(classes[label])

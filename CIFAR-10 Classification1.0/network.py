@@ -1,6 +1,7 @@
 # %%
 import torch.nn as nn
 import torch.nn.functional as F
+from torch.autograd import Variable
 import preprocession
 
 
@@ -12,7 +13,7 @@ class Net(nn.Module):
         self.conv2 = nn.Conv2d(6, 16, 5)
         self.fc1 = nn.Linear(16 * 5 * 5, 120)
         self.fc2 = nn.Linear(120, 84)
-        self.fc = nn.Linear(84, 10)
+        self.fc3 = nn.Linear(84, 10)
 
     def forward(self, x):
         x = F.max_pool2d(F.relu(self.conv1(x)), (2, 2))
@@ -62,8 +63,8 @@ for  epoch in range(2):
         optimizer.step()
         
         #打印log信息
-        running_loss +=loss.data[0]
-        if i%2000 == 1999  #每2000个batch打印一次训练状态
+        running_loss +=loss.item()
+        if i%2000 == 1999 : #每2000个batch打印一次训练状态
             print('[%d, %5d] loss: %.3f' \
                   % (epoch+1, i+1, running_loss / 2000))
             running_loss = 0.0
